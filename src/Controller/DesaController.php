@@ -6,6 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\AdminLTEBundle\Event\ShowUserEvent;
+use KevinPapst\AdminLTEBundle\Event\SidebarMenuEvent;
+use KevinPapst\AdminLTEBundle\Event\SidebarUserEvent;
+use Symfony\Component\HttpFoundation\Request;
+
+
 /**
  * Description of DesaController
  *
@@ -34,5 +40,6 @@ class DesaController extends AbstractController
             'user_first_name' => $userFirstName,
             'notifications' => $userNotifications,
         ]);
+
     }
 }
