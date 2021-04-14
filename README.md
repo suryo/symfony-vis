@@ -1,6 +1,6 @@
 # symfony-vis
 
-make entity with API /n
+make entity with API \n
 bin/console make:entity --api-resource
 
 check you API 
