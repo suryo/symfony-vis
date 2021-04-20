@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in API!{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -21,7 +21,7 @@
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
+        value="{{ csrf_token('authenticate') }}"
     >
 
     {#
