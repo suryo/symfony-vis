@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\User:
-            algorithm: auto
+            algorithm: argon2i
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -12,12 +12,24 @@ security:
                 property: email
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/_(profiler|wdt)
             security: false
+        api:
+            pattern: ^/api/
+            stateless: true
+            anonymous: false
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             anonymous: true
-            lazy: true
-            provider: app_user_provider
+            json_login:
+                check_path: /authentication_token
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
@@ -25,6 +37,11 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+
+            remember_me:
+                secret: "%kernel.secret%"
+                lifetime: 604800
+                path: /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -34,13 +51,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-        # require ROLE_ADMIN for /admin*
-        - { path: "^/admin", roles: ROLE_ADMIN }
-
-        # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*
-        - { path: "^/admin", roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
-        # # the 'path' value can be any valid regular expression
-        # # (this one will match URLs like /api/post/7298 and /api/comment/528491)
-        # - { path: ^/api/(post|comment)/\d+$, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
