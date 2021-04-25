@@ -1,13 +1,15 @@
 # symfony-vis API Platform
 
 
-#Create users table in DB:
+# Create users table in DB:
 
-bin/console doctrine:schema:create
+`bin/console doctrine:schema:create`
 
 email "admin@gmail.com" and the password "123456" (you can change it ):
 
-php bin/console doctrine:fixtures:load --append --group=UserFixtures
+- run this after setting
+
+`php bin/console doctrine:fixtures:load --append --group=UserFixtures`
 
 
 
@@ -17,15 +19,15 @@ php bin/console doctrine:fixtures:load --append --group=UserFixtures
 
 1. Make Entity with API 
 
-php bin/console make:entity --api-resource
+`php bin/console make:entity --api-resource`
 
 2. Make Migration
 
-' php bin/console make:migration'
+`php bin/console make:migration`
 
 3. Update Your Database
 
-' php bin/console doctrine:migrations:migrate'
+`php bin/console doctrine:migrations:migrate`
 
 - check you API
  
