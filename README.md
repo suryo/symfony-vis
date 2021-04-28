@@ -1,5 +1,5 @@
 # symfony-vis API Platform
-
+---
 
 # Create users table in DB:
 
@@ -11,7 +11,7 @@ email "admin@gmail.com" and the password "123456" (you can change it ):
 
 `php bin/console doctrine:fixtures:load --append --group=UserFixtures`
 
-
+---
 
 # Step to Make Entity and Migration
 
